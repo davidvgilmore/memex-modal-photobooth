@@ -76,5 +76,5 @@ Then go to `https://YOUR_ORG_NAME--photobooth-server.modal.run/` in your browser
 - I'd love if Modal had an api for pre-signed urls for image retrieval
 
 #### Credits:
-- https://modal.com/docs/examples/diffusers_lora_finetune#downloading-scripts-and-installing-a-git-repo-with-run_commands
+- https://modal.com/docs/examples/diffusers_lora_finetune
 - https://www.reddit.com/r/StableDiffusion/comments/1etszmo/finetuning_flux1dev_lora_on_yourself_lessons/
