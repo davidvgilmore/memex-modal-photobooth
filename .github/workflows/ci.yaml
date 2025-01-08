@@ -39,8 +39,9 @@ jobs:
       - name: lint
         run: bin/check
 
-      - name: run migrations
-        run: bin/db-migrate
+      # NOTE - we're not really doing anything with the db yet
+      # - name: run migrations
+      #   run: bin/db-migrate
 
       - name: test
         run: bin/test
