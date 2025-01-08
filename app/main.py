@@ -5,7 +5,6 @@ from typing import AsyncIterator, TypedDict
 import structlog
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
-from fastapi.templating import Jinja2Templates
 
 from app import __version__
 from app.kit.sqlite import (
@@ -78,5 +77,4 @@ def create_app() -> FastAPI:
 
 configure_logging()
 
-templates = Jinja2Templates(directory="templates")
 app = create_app()

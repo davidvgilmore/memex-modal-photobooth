@@ -20,7 +20,7 @@ from app.photobooth.service import PhotoboothService
 
 router = APIRouter(tags=["photobooth"])
 log = structlog.get_logger()
-templates = Jinja2Templates(directory="app/templates")
+templates = Jinja2Templates(directory="templates")
 
 
 class Routes:

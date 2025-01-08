@@ -1,7 +1,9 @@
 import json
+from pathlib import Path
 from typing import Dict
 
 from fastapi import FastAPI
+from fastapi.routing import Mount
 from modal import App, Image, Secret, Volume, asgi_app, gpu
 from pydantic import UUID4
 
@@ -51,6 +53,9 @@ image = (
     )
 )
 
+parent = Path(__file__).parent.parent
+templates_path = parent / "templates"
+
 
 @app.function(
     container_idle_timeout=30,
@@ -58,6 +63,9 @@ image = (
     secrets=[app_env],
     timeout=600,  # 10 minutes
     volumes={VOL_DIR: volume},
+    mounts=[
+        Mount("/root/templates", local_dir=templates_path),
+    ],
 )
 @asgi_app(label="photobooth-server")
 def api_server() -> FastAPI:

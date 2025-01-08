@@ -32,6 +32,9 @@ In order to deploy you'll need to:
 
 1. Run `bin/deploy-modal`
 
+> [!NOTE]
+> Your first call might be super duper slow because you have to download flux. To do this before training your lora, simply open your app in the browser: `https://YOUR_ORG_NAME--photobooth-server.modal.run/`
+
 ## Creating your LoRA
 
 Create a `.zip` file of 8-10 photos of yourself and submit it to the `/lora` creation endpoint.
