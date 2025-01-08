@@ -3,8 +3,7 @@ from pathlib import Path
 from typing import Dict
 
 from fastapi import FastAPI
-from fastapi.routing import Mount
-from modal import App, Image, Secret, Volume, asgi_app, gpu
+from modal import App, Image, Mount, Secret, Volume, asgi_app, gpu
 from pydantic import UUID4
 
 from app.photobooth.schemas import LoraCreate, PhotoboothCreate
@@ -54,7 +53,7 @@ image = (
 )
 
 parent = Path(__file__).parent.parent
-templates_path = parent / "templates"
+templates_path = parent / "app" / "templates"
 
 
 @app.function(
@@ -64,7 +63,9 @@ templates_path = parent / "templates"
     timeout=600,  # 10 minutes
     volumes={VOL_DIR: volume},
     mounts=[
-        Mount("/root/templates", local_dir=templates_path),
+        Mount.from_local_dir(
+            local_path=templates_path, remote_path="/root/app/templates"
+        ),
     ],
 )
 @asgi_app(label="photobooth-server")

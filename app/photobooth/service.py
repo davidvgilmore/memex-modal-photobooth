@@ -29,7 +29,7 @@ class PhotoboothService:
     def _download_models(self, model_name: ModelName) -> None:
         # if the flux1 dev model is already downloaded, skip
         fname = getattr(SafetensorsFilename, model_name.name)
-        if os.path.exists(f"{settings.MODEL_DIR}/models/{fname.value}"):
+        if os.path.exists(f"{settings.MODEL_DIR}/{fname.value}"):
             log.debug(f"{model_name} already downloaded")
             return
 

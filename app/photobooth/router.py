@@ -3,6 +3,7 @@ import base64
 import os
 from collections import defaultdict
 from io import BytesIO
+from pathlib import Path
 from typing import Any, Dict, List
 from uuid import uuid4
 
@@ -20,7 +21,7 @@ from app.photobooth.service import PhotoboothService
 
 router = APIRouter(tags=["photobooth"])
 log = structlog.get_logger()
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory=Path(__file__).parent.parent / "templates")
 
 
 class Routes:
