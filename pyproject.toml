@@ -1,0 +1,109 @@
+[project]
+name = "app"
+version = "0.0.0"
+description = "modal-photobooth"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "accelerate>=1.2.0",
+    "aiosqlite>=0.20.0",
+    "alembic>=1.14.0",
+    "diffusers>=0.31.0",
+    "fastapi>=0.115.6",
+    "hf-transfer>=0.1.8",
+    "httpx>=0.28.1",
+    "huggingface-hub>=0.26.5",
+    "itsdangerous>=2.2.0",
+    "modal>=0.67.40",
+    "numpy>=2.2.0",
+    "opencv-contrib-python-headless>=4.10.0.84",
+    "peft>=0.14.0",
+    "pydantic>=2.10.3",
+    "pydantic-settings>=2.6.1",
+    "python-multipart>=0.0.19",
+    "sentencepiece>=0.2.0",
+    "sqlmodel>=0.0.22",
+    "structlog>=24.4.0",
+    "torch>=2.5.1",
+    "torchvision>=0.20.1",
+    "transformers>=4.47.0",
+    "uvicorn>=0.32.1",
+]
+license = { file = "LICENSE" }
+urls = { Home = "https://github.com/anthonycorletti/modal-photobooth" }
+
+[dependency-groups]
+dev = [
+    "asgi-lifespan>=2.1.0",
+    "coverage>=7.6.4",
+    "greenlet>=3.1.1",
+    "mypy>=1.12.0",
+    "pytest>=8.3.3",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=6.0.0",
+    "rich>=13.9.2",
+    "ruff>=0.6.9",
+    "toml>=0.10.2",
+    "types-passlib>=1.7.7.20240819",
+    "types-toml>=0.10.8.20240310",
+]
+
+# ruff
+[tool.ruff]
+line-length = 88
+include = ["*.py"]
+exclude = ["dist", "build", ".venv", "tmp"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+pydocstyle = { convention = "google" }
+
+# mypy
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+disallow_untyped_defs = true
+exclude = ["dist", "build", ".venv", "tmp"]
+
+# setuptools
+[tool.setuptools.package-data]
+app = ["py.typed"]
+
+[tool.setuptools.dynamic.version]
+attr = "app.__version__"
+
+[tool.setuptools.packages.find]
+exclude = ["tests"]
+
+# pytest
+[tool.pytest.ini_options]
+addopts = [
+    "-o",
+    "console_output_style=progress",
+    "--asyncio-mode=auto",
+    "--disable-warnings",
+    "--showlocals",
+    "--cov=app",
+    "--cov=tests",
+    "--cov-report=term-missing",
+    "--cov-report=xml",
+    "--cov-report=html",
+]
+asyncio_default_fixture_loop_scope = "function"
+norecursedirs = ["tmp"]
+
+# coverage
+[tool.coverage.run]
+parallel = true
+source = ["app", "tests"]
+omit = ["*__init__.py", "app/_modal.py"]
+concurrency = ["thread", "greenlet", "multiprocessing"]
+
+[tool.coverage.report]
+exclude_lines = ["pragma: no cover"]
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.coverage.xml]
+output = "coverage.xml"
