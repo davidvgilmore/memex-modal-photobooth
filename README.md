@@ -1,9 +1,11 @@
-# modal-photobooth
+# modal-photobooth 📸
 
-Create your own LoRA from a few photos, and use that LoRA to power your own AI photobooth for your LinkedIn photo, other profile pictures, your pets, impressing your in-laws, and more 📸
+Create your own LoRA from a few photos with FLUX.1-dev, and use that LoRA to power your own AI photobooth for your LinkedIn photo, other profile pictures, your pets, impressing your in-laws, and more.
 
 > [!NOTE]
-> This is meant for demo and learning purposes. Your outputs may vary. Best to submit consistent photos in size, with some variance in angles, backgrounds, and lighting - but nothing too extreme (tilted faces, many faces, too much contrast, etc.)
+> This is meant for demo and learning purposes. Your outputs may vary. Best to submit 8-12 consistent photos in size, with some variance in angles, backgrounds, and lighting - but nothing too extreme (tilted faces, many faces, too much contrast, etc.)
+
+![](./assets/demo-screenshot.png)
 
 ## Getting started
 
@@ -11,7 +13,7 @@ You'll need to install `uv` https://docs.astral.sh/uv/getting-started/installati
 
 After you've cloned, run `bin/install` to locally install the project.
 
-You'll also have to agree to use the flux1-dev model terms: https://huggingface.co/black-forest-labs/FLUX.1-dev.
+You'll also have to agree to use the flux1-dev model terms: https://huggingface.co/black-forest-labs/FLUX.1-dev and generate a hugging face api key.
 
 ## Deploying to Modal
 
@@ -33,11 +35,11 @@ In order to deploy you'll need to:
 1. Run `bin/deploy-modal`
 
 > [!NOTE]
-> Your first call might be super duper slow because you have to download flux. To do this before training your lora, simply open your app in the browser: `https://YOUR_ORG_NAME--photobooth-server.modal.run/`
+> Your first call might be super duper slow because you have to download flux. To do this before training your lora, simply open your app in the browser and check the logs before training: `https://YOUR_ORG_NAME--photobooth-server.modal.run/`
 
 ## Creating your LoRA
 
-Create a `.zip` file of 8-10 photos of yourself and submit it to the `/lora` creation endpoint.
+Create a `.zip` file of 8-12 photos of yourself and submit it to the `/lora` creation endpoint.
 
 Set a subject name to be something unique and adjust the training prompt as you see fit.
 
@@ -63,16 +65,14 @@ curl -X 'POST' \
 'https://YOUR_ORG_NAME--photobooth-server.modal.run/photobooth' \
 -H 'accept: application/json' \
 -H 'Content-Type: application/json' \
--d '{ "lora_id": "YOUR_LORA_ID",
-  "prompt": "A professional photo of SUBJECT_NAME a 31 year old male founder wearing a black t-shirt in an office space looking at the camera.", "inference_config": {"num_inference_steps": 80, "num_images_per_prompt": 4}
-}'
+-d '{ "lora_id": "YOUR_LORA_ID", "prompt": "A professional photo of SUBJECT_NAME a 31 year old male founder wearing a black t-shirt in an office space looking at the camera.", "inference_config": {"num_inference_steps": 80, "num_images_per_prompt": 4} }'
 ```
 
 Then go to `https://YOUR_ORG_NAME--photobooth-server.modal.run/` in your browser to view the generations. It should take about a minute or so.
 
 ## Future thoughts and considerations
 
-- How the heck does fal.ai do lora training so fast https://fal.ai/models/fal-ai/flux-lora-fast-training/
+- How the heck does https://fal.ai do lora training so fast https://fal.ai/models/fal-ai/flux-lora-fast-training/ (quality is variable)
 - I'd love if Modal had an api for pre-signed urls for image retrieval
 
 #### Credits:
