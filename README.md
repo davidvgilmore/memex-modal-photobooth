@@ -70,8 +70,9 @@ curl -X 'POST' \
 
 Then go to `https://YOUR_ORG_NAME--photobooth-server.modal.run/` in your browser to view the generations. It should take about a minute or so.
 
-## Future thoughts and considerations
+## Thoughts and considerations
 
+- It costs about $30 to do this with picstudio.ai, but with modal-photobooth, you can create your LoRA (~ $3-$4) and many pictures for just a few extra dollars on Modal!
 - How the heck does https://fal.ai do lora training so fast https://fal.ai/models/fal-ai/flux-lora-fast-training/ (quality is variable)
 - I'd love if Modal had an api for pre-signed urls for image retrieval
 
